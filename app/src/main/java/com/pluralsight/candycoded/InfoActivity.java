@@ -28,22 +28,16 @@ public class InfoActivity extends AppCompatActivity {
        address_tv.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               createMapIntent();
+               createMapIntent(view);
            }
        });
     }
-    public void createMapIntent(){
-
-                // Create a Uri from an intent string. Use the result to create an Intent.
-                Uri gmmIntentUri = Uri.parse("google.streetview:cbll=46.414382,10.013988");
-
-                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+    public void createMapIntent(View view){
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=618 E South St Orlando, FL 32801");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                // Make the Intent explicit by setting the Google Maps package
-                mapIntent.setPackage("com.google.android.apps.maps")    ;
-
-                // Attempt to start an activity that can handle the Intent
-                startActivity(mapIntent);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if (mapIntent.resolveActivity(getPackageManager()) != null)
+                    startActivity(mapIntent);
 
     }
 
